@@ -20,7 +20,7 @@ RUN uv sync --locked
 
 COPY ingest_data.py .
 
-ENTRYPOINT ["python", "ingest_data.py"]
+ENTRYPOINT ["uv", "run", "python", "ingest_data.py"]
 ```
 
 ### Explanation
@@ -32,7 +32,7 @@ ENTRYPOINT ["python", "ingest_data.py"]
 - `COPY pyproject.toml .python-version uv.lock ./`: Copy dependency files first (better caching)
 - `RUN uv sync --locked`: Install all dependencies from lock file (ensures reproducible builds)
 - `COPY ingest_data.py .`: Copy ingestion script
-- `ENTRYPOINT ["python", "ingest_data.py"]`: Set entry point to run the ingestion script
+- `ENTRYPOINT ["uv", "run", "python", "ingest_data.py"]`: Set entry point to run the ingestion script
 
 ## Build the Docker Image
 
